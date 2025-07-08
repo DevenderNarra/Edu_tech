@@ -12,7 +12,7 @@ services:
     image: devendern/react-frontend:latest   # ✅ FROM DOCKER HUB
     container_name: react-frontend
     ports:
-      - "3000:80"
+      - "3010:80"
     networks:
       - edtech-network
     depends_on:

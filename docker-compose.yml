@@ -1,18 +1,24 @@
+
 services:
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile  # Backend Dockerfile should be in root
+    image: devendern/django-backend:latest   # ✅ FROM DOCKER HUB
+    container_name: django-backend
     ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
-    restart: always
+      - "8010:8000"
+    networks:
+      - edtech-network
 
   frontend:
-    build: ./frontend
+    image: devendern/react-frontend:latest   # ✅ FROM DOCKER HUB
+    container_name: react-frontend
     ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
-    restart: always
+      - "3000:80"
+    networks:
+      - edtech-network
+    depends_on:
+      - backend
+
+networks:
+  edtech-network:
+    driver: bridge
+
